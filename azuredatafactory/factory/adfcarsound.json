@@ -1,0 +1,9 @@
+{
+	"name": "adfcarsound",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "71d2d441-17ed-474a-aedc-f52372f2254d",
+		"tenantId": "304c3655-a3d2-44b7-8cd5-3250f4bbb0a5"
+	}
+}
