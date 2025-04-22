@@ -5,6 +5,11 @@
 			"referenceName": "ls_sqldb",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"file_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
