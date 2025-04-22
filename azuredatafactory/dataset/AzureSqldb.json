@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"file_name": {
+			"table_name": {
 				"type": "string"
 			}
 		},
@@ -48,11 +48,28 @@
 				"name": "Month",
 				"type": "int",
 				"precision": 10
+			},
+			{
+				"name": "Year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BranchName",
+				"type": "varchar"
+			},
+			{
+				"name": "DealerName",
+				"type": "varchar"
+			},
+			{
+				"name": "Product_Name",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "source_cars_data"
+			"table": "source_car_data"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
