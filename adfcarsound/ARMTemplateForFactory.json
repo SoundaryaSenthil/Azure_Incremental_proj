@@ -75,7 +75,7 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": {
-									"value": "select * from source_cars_data where Date_ID >' @{activity('last_load').output.value[0].last_load}' and Date_ID <= '@{activity('currentload').output.value[0].max_date}'",
+									"value": "select * from source_car_data where Date_ID >'@{activity('last_load').output.value[0].last_load}' and Date_ID <= '@{activity('currentload').output.value[0].max_date}'",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
@@ -102,10 +102,10 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ds_sql_db",
+								"referenceName": "AzureSqldb",
 								"type": "DatasetReference",
 								"parameters": {
-									"table_name": "source_cars_data"
+									"table_name": "source_car_data"
 								}
 							}
 						],
@@ -137,7 +137,7 @@
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "ds_sql_db",
+								"referenceName": "AzureSqldb",
 								"type": "DatasetReference",
 								"parameters": {
 									"table_name": "Watermark_Table"
@@ -161,15 +161,15 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "SELECT max(Date_ID) as max_date FROM source_cars_data",
+								"sqlReaderQuery": "SELECT max(Date_ID) as max_date FROM source_car_data",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "ds_sql_db",
+								"referenceName": "AzureSqldb",
 								"type": "DatasetReference",
 								"parameters": {
-									"table_name": "source_cars_data"
+									"table_name": "source_car_data"
 								}
 							},
 							"firstRowOnly": false
@@ -219,7 +219,7 @@
 				"lastPublishTime": "2025-04-20T15:45:32Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_sql_db')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqldb')]",
 				"[concat(variables('factoryId'), '/datasets/bronze_ds')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_sqldb')]"
 			]
@@ -256,7 +256,8 @@
 							"sink": {
 								"type": "AzureSqlSink",
 								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"translator": {
@@ -357,6 +358,54 @@
 											"type": "Int32",
 											"physicalType": "int"
 										}
+									},
+									{
+										"source": {
+											"name": "Year",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Year",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "BranchName",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BranchName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "DealerName",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DealerName",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Product_Name",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Product_Name",
+											"type": "String",
+											"physicalType": "varchar"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -371,7 +420,7 @@
 								"referenceName": "ds_github",
 								"type": "DatasetReference",
 								"parameters": {
-									"load_flag": "SalesData.csv"
+									"load_flag": "NewDataSales.csv"
 								}
 							}
 						],
@@ -379,7 +428,9 @@
 							{
 								"referenceName": "AzureSqldb",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"table_name": "source_car_data"
+								}
 							}
 						]
 					}
@@ -403,6 +454,11 @@
 				"linkedServiceName": {
 					"referenceName": "ls_sqldb",
 					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"table_name": {
+						"type": "string"
+					}
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -442,11 +498,28 @@
 						"name": "Month",
 						"type": "int",
 						"precision": 10
+					},
+					{
+						"name": "Year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BranchName",
+						"type": "varchar"
+					},
+					{
+						"name": "DealerName",
+						"type": "varchar"
+					},
+					{
+						"name": "Product_Name",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "source_cars_data"
+					"table": "source_car_data"
 				}
 			},
 			"dependsOn": [
@@ -511,69 +584,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ls_github')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_sql_db')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_sqldb",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"table_name": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Branch_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "Dealer_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "Model_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "Revenue",
-						"type": "bigint",
-						"precision": 19
-					},
-					{
-						"name": "Units_Sold",
-						"type": "bigint",
-						"precision": 19
-					},
-					{
-						"name": "Date_ID",
-						"type": "varchar"
-					},
-					{
-						"name": "Day",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Month",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "source_cars_data"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_sqldb')]"
 			]
 		},
 		{
