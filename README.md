@@ -58,18 +58,25 @@ SCD Type 1 Handling: Applied uniformly to update dimensional data in-place.
 Dimensional Model Design: Star schema including fact and dimension tables for reporting use cases.
 
 Governance via Unity Catalog: Role-based access control and centralized metadata management.
-![Screenshot 2025-04-22 182912](https://github.com/user-attachments/assets/d787dc42-febe-4b35-9d77-b3bad393b2ee)
+![Screenshot 2025-04-22 182912](https://github.com/user-attachments/assets/9aa826ac-2694-44b6-90db-86329f0b4755)
+
 
 ***Tech Stack***
 
 Azure Data Lake – Scalable storage for structured and unstructured data.
+
 Azure SQL Database – Managed relational database for analytical processing.
+
 Azure Data Factory – ETL orchestration tool for automated data workflows.
+
 Incremental Data Loading – Optimize performance and manage data efficiently.
+
 Star Schema – Improve query performance using dimensional modeling.Keywords
+
 Azure, Data Engineering, Incremental Loading, Star Schema, Data Factory, ETL, Medallion Architecture
 
 📌 Stay Connected!
+
 For more updates on Azure data engineering projects, feel free to contribute, share feedback, or explore similar repositories.
 
 🚀 Happy Coding!
