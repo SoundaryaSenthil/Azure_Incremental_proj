@@ -32,7 +32,8 @@ Dynamically ingests data from GitHub into an Azure SQL Database using parameteri
 Incremental Load Pipeline (ADF):
 
 Performs incremental data loads from Azure SQL Database into the Bronze Layer (Delta Lake). It includes logic for tracking new and updated records for downstream processing.
-![Screenshot 2025-04-20 202442](https://github.com/user-attachments/assets/a2f58628-ab25-4200-96bd-6fbb90f5d295)
+![Screenshot 2025-04-20 203820](https://github.com/user-attachments/assets/1c3f0e87-d7c1-46c4-a02e-8d5f1c9dde85)
+
 
 ***📐 Architecture***
 
@@ -58,4 +59,17 @@ Dimensional Model Design: Star schema including fact and dimension tables for re
 
 Governance via Unity Catalog: Role-based access control and centralized metadata management.
 ![Screenshot 2025-04-22 182912](https://github.com/user-attachments/assets/d787dc42-febe-4b35-9d77-b3bad393b2ee)
-![Screenshot 2025-04-22 205329](https://github.com/user-attachments/assets/19d371f0-ed04-4b8c-a376-9decbaa17d0a)
+
+***Tech Stack***
+
+Azure Data Lake – Scalable storage for structured and unstructured data.
+Azure SQL Database – Managed relational database for analytical processing.
+Azure Data Factory – ETL orchestration tool for automated data workflows.
+Incremental Data Loading – Optimize performance and manage data efficiently.
+Star Schema – Improve query performance using dimensional modeling.Keywords
+Azure, Data Engineering, Incremental Loading, Star Schema, Data Factory, ETL, Medallion Architecture
+
+📌 Stay Connected!
+For more updates on Azure data engineering projects, feel free to contribute, share feedback, or explore similar repositories.
+
+🚀 Happy Coding!
