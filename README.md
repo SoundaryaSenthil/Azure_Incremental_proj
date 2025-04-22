@@ -1,7 +1,8 @@
 💡 ***End-to-End Data Engineering Project on Azure with Incremental data loading and SCD***
 ***🚀 Project Overview***
 This project demonstrates a complete end-to-end data engineering pipeline using modern cloud-native technologies. It showcases how to build scalable, modular, and secure data workflows using Azure Data Factory, Azure Databricks, PySpark, and Delta Lake—all organized using the Medallion Architecture. Real-world concepts such as Slowly Changing Dimensions (SCD) and Dimensional Modeling are also implemented.
-![Screenshot 2025-04-19 192104](https://github.com/user-attachments/assets/47e67b0d-8d78-4753-bd09-86a81dcc463c)
+
+![1741759966984 (1)](https://github.com/user-attachments/assets/4905df98-2f19-4ee6-83fa-03a348680ce1)
 
 ***🔧 Technologies & Concepts Used***
 Azure Data Factory (ADF): Orchestrates workflows and automates data movement and transformation.
